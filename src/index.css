@@ -1,0 +1,374 @@
+/* Mobile-first modern stylesheet (base = small screens) */
+:root {
+  --navy-900: #071034;
+  --navy-800: #0b1636;
+  --red-500: #b71c1c;
+  --red-600: #a51717;
+  --gold: #d4af37;
+  --muted: #9aa6b2;
+  --card-glass: rgba(10, 14, 30, 0.36);
+  --card-surface: rgba(255, 255, 255, 0.02);
+  --accent-glow: rgba(212, 175, 55, 0.18);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 15px;
+  color: #e6eef8;
+  background: radial-gradient(
+      800px 350px at 12% 10%,
+      rgba(183, 26, 26, 0.06),
+      transparent 12%
+    ),
+    radial-gradient(
+      700px 300px at 88% 90%,
+      rgba(212, 175, 55, 0.02),
+      transparent 10%
+    ),
+    linear-gradient(180deg, var(--navy-900), #07112a 70%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* App frame (mobile-first) */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 18px 12px;
+}
+.app-card {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: 0 12px 46px rgba(2, 6, 23, 0.45), 0 0 60px rgba(167, 20, 20, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.06);
+  backdrop-filter: blur(6px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+.header .title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold);
+  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+}
+.header .subtitle {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg, var(--red-600), #8b1414);
+  color: var(--navy-900);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(183, 26, 26, 0.18);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: var(--gold);
+  cursor: pointer;
+}
+
+/* Toggle group */
+.toggle-group {
+  display: inline-flex;
+  gap: 6px;
+}
+.toggle-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+.toggle-btn.active {
+  background: linear-gradient(90deg, var(--red-600), #8b1414);
+  color: #fff;
+}
+
+/* Carousel (mobile) */
+.carousel-viewport {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 8px 0;
+}
+.carousel-viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform 420ms cubic-bezier(0.22, 0.9, 0.2, 1);
+  will-change: transform;
+  align-items: stretch;
+}
+.carousel-slide {
+  flex: 0 0 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.control-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.01);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gold);
+}
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.indicators {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.1);
+}
+.indicator.indicator-active {
+  background: var(--gold);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.14);
+}
+
+/* Jersey card (mobile-first) */
+.jersey-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 18px 50px rgba(183, 26, 26, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.06);
+  min-height: 380px;
+}
+.jersey-card .view-toggle {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.jersey-image {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--navy-800);
+}
+.jersey-image > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 420ms, opacity 320ms;
+}
+.jersey-card h3 {
+  margin: 12px 0 6px 0;
+  font-size: 16px;
+  color: var(--gold);
+}
+.jersey-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+.select-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, var(--red-500), var(--red-600));
+  color: var(--navy-900);
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.select-btn.selected {
+  background: linear-gradient(90deg, #d4af37, #bfa23a);
+  color: #071034;
+}
+
+/* Form & Confirmation panels (mobile) */
+.form-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(2, 6, 23, 0.36);
+  width: 100%;
+  margin: 12px 0;
+  border: 1px solid rgba(212, 175, 55, 0.06);
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.form-row label {
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 700;
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: transparent;
+  color: #e6eef8;
+}
+.confirm-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, var(--red-600), #8b1414);
+  color: var(--gold);
+  font-weight: 800;
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* Scale up for larger screens */
+@media (min-width: 520px) {
+  .app-shell {
+    padding: 24px 18px;
+  }
+  .app-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+  .header .title {
+    font-size: 20px;
+  }
+  .carousel-slide {
+    flex: 0 0 280px;
+  }
+  .jersey-card {
+    min-height: 480px;
+  }
+  .jersey-image {
+    padding-top: 133.33%;
+  }
+}
+
+@media (min-width: 720px) {
+  .app-shell {
+    padding: 32px 24px;
+  }
+  .app-card {
+    padding: 28px;
+    max-width: 1150px;
+  }
+  .header .title {
+    font-size: 24px;
+  }
+  .carousel-slide {
+    flex: 0 0 320px;
+  }
+  .jersey-card {
+    min-height: 520px;
+  }
+  .controls {
+    gap: 12px;
+  }
+  .control-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 980px) {
+  .app-shell {
+    padding: 48px 32px;
+  }
+  .header .title {
+    font-size: 28px;
+  }
+  .carousel-slide {
+    flex: 0 0 360px;
+  }
+  .jersey-card {
+    min-height: 620px;
+  }
+}
