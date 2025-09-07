@@ -135,7 +135,8 @@ export const JerseyCard = ({
       </div>
 
       <div style={styles.imageContainer}>
-        {(showFront && jersey.frontImage) || (!showFront && jersey.backImage) ? (
+        {(showFront && jersey.frontImage) ||
+        (!showFront && jersey.backImage) ? (
           <img
             src={showFront ? jersey.frontImage : jersey.backImage}
             alt={`${jersey.name} ${showFront ? "front" : "back"}`}
@@ -149,7 +150,9 @@ export const JerseyCard = ({
               left: 0,
               width: "100%",
               height: "100%",
-              background: showFront ? jersey.color : getDarkerColor(jersey.color),
+              background: showFront
+                ? jersey.color
+                : getDarkerColor(jersey.color),
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

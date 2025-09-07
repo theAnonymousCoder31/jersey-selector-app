@@ -223,7 +223,10 @@ export const Carousel = ({
     const drag = Math.max(-viewportWidth, Math.min(delta, viewportWidth));
     if (trackRef.current) {
       trackRef.current.style.transition = "none";
-      trackRef.current.style.transform = `translateX(-${Math.min(Math.max(step * currentIndex + drag, 0), maxTranslate)}px)`;
+      trackRef.current.style.transform = `translateX(-${Math.min(
+        Math.max(step * currentIndex + drag, 0),
+        maxTranslate
+      )}px)`;
       touchMoveRef.current = drag;
     }
   };
@@ -234,7 +237,9 @@ export const Carousel = ({
     const swipeDistance = touchStart - touchEnd;
 
     // restore transition
-    if (trackRef.current) trackRef.current.style.transition = "transform 420ms cubic-bezier(.22,.9,.2,1)";
+    if (trackRef.current)
+      trackRef.current.style.transition =
+        "transform 420ms cubic-bezier(.22,.9,.2,1)";
     if (touchMoveRef.current !== null) touchMoveRef.current = null;
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
@@ -263,7 +268,7 @@ export const Carousel = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEndEnhanced}
-           ref={trackRef}
+          ref={trackRef}
         >
           {jerseys.map((jersey, idx) => (
             <div
