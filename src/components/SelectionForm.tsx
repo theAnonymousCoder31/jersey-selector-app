@@ -23,50 +23,37 @@ export const SelectionForm = ({
       opinion: opinion.trim(),
     };
 
-    // Send data to a Google Apps Script Web App endpoint (deployed as "Anyone, even anonymous")
-    // Provide the deployment URL via Vite env var VITE_APPS_SCRIPT_URL or replace the placeholder below.
-    const APPS_SCRIPT_URL =
-      (import.meta as any).env.VITE_APPS_SCRIPT_URL ||
-      "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec";
+    // Google Form action URL (formResponse, not viewform)
+    const GOOGLE_FORM_ACTION =
+      "https://docs.google.com/forms/d/e/1FAIpQLScuVtmk8tqNmBIbwL9MOZHg1N-nIdokt-5rOURvuSeXIuhPGg/formResponse";
 
-    // Use FormData to avoid CORS preflight. The Apps Script doPost handler will read e.parameter.
+    // Match the entry IDs from your form:
+    // Jersey Choice: entry.23019623
+    // Player Name: entry.1586441492
+    // Opinion: entry.1513059736
     const formData = new FormData();
-    formData.append("jerseyName", selectedJersey.name);
-    formData.append("playerName", playerName.trim());
-    formData.append("opinion", opinion.trim());
+    formData.append("entry.23019623", selectedJersey.name);
+    formData.append("entry.1586441492", playerName.trim());
+    formData.append("entry.1513059736", opinion.trim());
 
     try {
       setSubmitting(true);
 
-      const resp = await fetch(APPS_SCRIPT_URL, {
+      await fetch(GOOGLE_FORM_ACTION, {
         method: "POST",
+        mode: "no-cors", // Required for Google Forms
         body: formData,
-        mode: "cors",
       });
 
-      if (!resp.ok) {
-        throw new Error(`Server returned ${resp.status}`);
-      }
-
-      // Try to parse JSON response from Apps Script (expected { status: 'success' })
-      const json = await resp.json().catch(() => null);
-      if (json && json.status !== "success") {
-        throw new Error("Server returned an unexpected response");
-      }
-
-      // Local onSubmit to update app state / show confirmation
       onSubmit(selection);
 
-      alert("✅ Response recorded!");
+      alert("✅ Response recorded via Google Form!");
 
-      // Reset local form fields
       setPlayerName("");
       setOpinion("");
     } catch (err) {
       console.error(err);
-      alert(
-        "There was a problem submitting your response. Please try again or check your deployment."
-      );
+      alert("There was a problem submitting your response.");
     } finally {
       setSubmitting(false);
     }
@@ -247,6 +234,7 @@ export const SelectionForm = ({
               placeholder="Share your thoughts about this design..."
               rows={4}
               style={styles.textarea}
+              required
             />
           </div>
 
