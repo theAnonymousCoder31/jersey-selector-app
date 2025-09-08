@@ -134,6 +134,7 @@ export const SelectionForm = ({
       background: "rgba(255,255,255,0.9)",
       outline: "none",
       boxShadow: "inset 0 1px 0 rgba(255,255,255,0.6)",
+      color: "#0f172a",
     },
     textarea: {
       padding: 10,
@@ -142,6 +143,7 @@ export const SelectionForm = ({
       minHeight: 96,
       resize: "vertical",
       background: "rgba(255,255,255,0.9)",
+      color: "#0f172a",
     },
     actions: {
       display: "flex",
