@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Jersey, JerseySelection } from "./types/jersey";
-import { Carousel } from "./components/Carousel";
+import { JerseyCarousel } from "./components/Carousel";
 import { SelectionForm } from "./components/SelectionForm";
 import { Confirmation } from "./components/Confirmation";
 
@@ -155,7 +155,7 @@ export default function App() {
           </p>
         </div>
 
-        <Carousel
+        <JerseyCarousel
           jerseys={jerseyData}
           selectedJerseyId={selectedJerseyId}
           onSelectJersey={handleSelectJersey}
